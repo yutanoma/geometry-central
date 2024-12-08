@@ -69,6 +69,7 @@ public:
 
   // Insert a new vertex in to the intrinsic triangulation
   Vertex insertVertex(SurfacePoint newPositionOnIntrinsic) override;
+  void resolveNewVertex(Vertex newV, SurfacePoint intrinsicPoint);
 
   // Remove an (inserted) vertex from the triangulation.
   // Note: if something goes terribly (numerically?) wrong, will exit without removing the vertex.
@@ -96,7 +97,7 @@ private:
   // Insertion helpers
   Vertex insertVertex_face(SurfacePoint newPositionOnIntrinsic);
   Halfedge insertVertex_edge(SurfacePoint newPositionOnIntrinsic);
-  void resolveNewVertex(Vertex newV, SurfacePoint intrinsicPoint);
+  // void resolveNewVertex(Vertex newV, SurfacePoint intrinsicPoint);
 
   // Update a signpost angle from the (counter-)clockwise neighboring angle
   void updateAngleFromCWNeighor(Halfedge he);
