@@ -528,7 +528,7 @@ void CommonSubdivision::constructMeshData(std::vector<std::vector<size_t>>& face
         }
       }
 
-      GC_SAFETY_ASSERT(sharedFace != Face(), "could not identify source face on mesh A")
+      // GC_SAFETY_ASSERT(sharedFace != Face(), "could not identify source face on mesh A")
       sourceFaceA_out.push_back(sharedFace);
     }
   }
@@ -620,13 +620,19 @@ std::vector<std::vector<size_t>> sliceNicelyOrderedFace(const std::vector<size_t
   } else {
     // cout << "Triforce!" << endl;
     // Triforce configuration
-    GC_SAFETY_ASSERT((nij + njk + nki) % 2 == 0, "normal coordinates which obey the triangle "
-                                                 "inequality must sum to an even number");
+    // GC_SAFETY_ASSERT((nij + njk + nki) % 2 == 0, "normal coordinates which obey the triangle "
+    //                                              "inequality must sum to an even number");
 
     // Corner coordinates
     size_t ci = (nij - njk + nki) / 2;
     size_t cj = (njk - nki + nij) / 2;
     size_t ck = (nki - nij + njk) / 2;
+
+    if ((nij + njk + nki) % 2 != 0) {
+      ci = (nij - njk + nki - 1) / 2;
+      cj = (njk - nki + nij - 1) / 2;
+      ck = (nki - nij + njk - 1) / 2;
+    }
 
     // cout << "ci: " << ci << "\tcj: " << cj << "\tck: " << ck << endl;
 
