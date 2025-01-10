@@ -572,6 +572,11 @@ Face SignpostIntrinsicTriangulation::removeInsertedVertex(Vertex v) {
 
   // Remove the vertex
   Face newF = intrinsicMesh->removeVertex(v);
+
+  if (newF == Face()) {
+    return Face();
+  }
+
   updateFaceBasis(newF);
   triangulationChanged();
   return newF;
